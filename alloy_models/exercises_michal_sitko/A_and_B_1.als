@@ -34,7 +34,14 @@ fact notThree {
 pred show {}
 
 //Assertions
+//used to find counter examples, which would make the assertion invalid
+
+assert greaterThanTwo {
+	#A > 2
+}
 
 //Commands
 
 run atLeastOneAndAtMostFive for 6
+
+check greaterThanTwo
