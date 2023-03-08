@@ -4,11 +4,32 @@
 
 sig A {}
 
-sig B {
-	parent: A
-}
+//sig B {
+//	parent: A
+//}
 
 // Predicates and facts
+
+pred atLeastOne {
+	#A > 0 //numbers of elems in a set
+}
+
+pred atLeastOneAndAtMostFive {
+	atLeastOne && #A < 6
+}
+
+pred atLeastOneAndAtMostFiveAlternative {
+	atLeastOne
+	#A < 6
+}
+
+//facts are predicates that are always applied (no need to invoke them)
+//use to model global invariants
+
+fact notThree {
+	#A != 3
+}
+
 
 pred show {}
 
@@ -16,4 +37,4 @@ pred show {}
 
 //Commands
 
-run {} for exactly 2 A, 1 B
+run atLeastOneAndAtMostFive for 6
