@@ -1,4 +1,4 @@
-// Solutions to Homework 1
+// Solutions for Homework 2
 
 module formalMethods/curriculum
 
@@ -8,35 +8,20 @@ some sig Course {
 } 
 
 // some courses are core courses
-some sig CoreCourse extends Course {} 
+some sig CoreCourse in Course {} 
 
 sig Specialization {}
 
-//A student must take at least one core course and at most one non-core course
-
 sig Student {
- 	coreCourses: some CoreCourse,
-	nonCoreCourses: some Course-CoreCourse,
-	specializations : one Specialization
+	specialization: Specialization,
+ 	courses: set Course
 }
-
-//constraints
-
-pred tookCoursesFromSpec(s : Student) {
-	s.specializations - s.coreCourses.specializations = none
-}
-
-pred tookTwoCoursesMore(s : Student){
-	#s.nonCoreCourses = 2
-}
-
-
 
 pred valid(s:Student){
-	#s.nonCoreCourses = 2
-	s.specializations - s.coreCourses.specializations = none
+	let p=s.specialization|{
+		all c: CoreCourse| p in c.specializations => c in s.courses
+		some disj c1,c2: Course |  not p in c1.specializations && not p in c2.specializations && c1+c2 in s.courses
+	}
 }
+run valid 
 
-pred show(){}
-run valid
-run show 
