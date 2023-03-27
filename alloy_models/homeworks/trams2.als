@@ -41,10 +41,17 @@ pred differentLineDifferentTerminus() {all disj l,l1:Line | l.origin != l1.origi
 //No two lines share the same terminus, I interpreted terminus here to be at the same time origin and destination
 
 
+pred allThreePred() {differentStopsForLines and allStopOnALine and differentLineDifferentTerminus}
+
+
 pred show(){}
 //run differentStopsForLines for 4 Terminus, exactly 2 Line, 6 Stop
 
 //run allStopOnALine for exactly 2 Line, 4 Terminus, 6 Stop
 
-run differentLineDifferentTerminus for exactly 2 Line, 4 Terminus, 6 Stop
+//run differentLineDifferentTerminus for exactly 2 Line, 4 Terminus, 6 Stop
+
+run allThreePred for exactly 2 Line, 4 Terminus, 6 Stop
+
+
 
